@@ -1,0 +1,155 @@
+""" options
+set relativenumber
+set number
+set scrolloff=10
+set clipboard+=unnamed
+set ignorecase
+set incsearch
+set hls
+set notimeout
+set timeoutlen=5000
+
+""" plugins
+set which-key
+set sneak
+let g:WhichKey_DefaultDelay = 0
+Plug 'preservim/nerdtree'
+Plug 'machakann/vim-highlightedyank'
+
+"""  leader r
+let g:WhichKeyDesc_SpaceR = '<Space>r Rename/Refactor/Reformat'
+let g:WhichKeyDesc_SpaceRa = '<Space>ra Rename all'
+nnoremap <Space>ra :%s//g<Left><Left>
+let g:WhichKeyDesc_SpaceRm = '<Space>rm Reformat'
+nnoremap <Space>rm :action ReformatCode<CR>
+let g:WhichKeyDesc_SpaceRr = '<Space>rr Rename symbol'
+nnoremap <Space>rr :action RenameElement<CR>
+let g:WhichKeyDesc_SpaceRe = '<Space>re Refactor'
+nnoremap <Space>re :action ShowIntentionActions<CR>
+let g:WhichKeyDesc_SpaceRl = '<Space>rl Recent locations'
+nnoremap <Space>rl :action RecentLocations<CR>
+
+""" leader g
+let g:WhichKeyDesc_G = 'g Go'
+let g:WhichKeyDesc_Gi = 'gi Implementations'
+let g:WhichKeyDesc_Gn = 'gn Next error'
+let g:WhichKeyDesc_Gn_p = 'gN Previous error'
+let g:WhichKeyDesc_Gb = 'gb Back'
+let g:WhichKeyDesc_Gf = 'gf Forward'
+
+""" leader f
+let g:WhichKeyDesc_SpaceF = '<Space>f Find'
+let g:WhichKeyDesc_SpaceFf = '<Space>ff Find file'
+nnoremap <Space>ff :action GotoFile<CR>
+let g:WhichKeyDesc_SpaceFu = '<Space>fu Find usages'
+nnoremap <Space>fu :action FindUsages<CR>
+let g:WhichKeyDesc_SpaceFw = '<Space>fw Show find window'
+nnoremap <Space>fw :action ActivateFindToolWindow<CR>
+
+""" leader v
+let g:WhichKeyDesc_SpaceV = '<Space>v VCS'
+let g:WhichKeyDesc_SpaceVu = '<Space>vu VCS Update'
+nnoremap <Space>vu :action Vcs.UpdateProject<CR>
+let g:WhichKeyDesc_SpaceVb = '<Space>vb VCS Branches'
+nnoremap <Space>vb :action Git.Branches<CR>
+let g:WhichKeyDesc_SpaceVa = '<Space>va VCS Annotate'
+nnoremap <Space>va :action Annotate<CR>
+let g:WhichKeyDesc_SpaceVh = '<Space>vh VCS History'
+nnoremap <Space>vh :action Vcs.ShowTabbedFileHistory<CR>
+let g:WhichKeyDesc_SpaceVp = '<Space>vp VCS Push'
+nnoremap <Space>vp :action Vcs.Push<CR>
+let g:WhichKeyDesc_SpaceVc = '<Space>vc VCS Changes/Commit'
+let g:WhichKeyDesc_SpaceVch = '<Space>vch VCS Commit'
+nnoremap <Space>vch :action CheckinProject<CR>
+let g:WhichKeyDesc_SpaceVN = '<Space>vN VCS Previous change'
+nnoremap <Space>vcp :action VcsShowPrevChangeMarker<CR>
+let g:WhichKeyDesc_SpaceVn = '<Space>vn VCS Next change'
+nnoremap <Space>vcn :action VcsShowNextChangeMarker<CR>
+let g:WhichKeyDesc_SpaceVr = '<Space>vr VCS Revert'
+nnoremap <Space>vr :action ChangesView.Revert<CR>
+
+""" leader t
+let g:WhichKeyDesc_SpaceT = '<Space>t Tools'
+let g:WhichKeyDesc_SpaceTt = '<Space>ta Focus terminal'
+let g:WhichKeyDesc_SpaceTtn = '<Space>tn New terminal'
+nnoremap <Space>tn :action Terminal.OpenInTerminal<CR>
+nnoremap <Space>ta :action ActivateTerminalToolWindow<CR>
+
+""" s
+nnoremap s :action KJumpAction.Char2<CR>
+
+""" <Space> s
+let g:WhichKeyDesc_SpaceS = '<Space>s Search/Structure'
+let g:WhichKeyDesc_SpaceSe = '<Space>se Search everywhere'
+nnoremap <Space>se :action SearchEverywhere<CR>
+let g:WhichKeyDesc_SpaceSp = '<Space>sp View structure popup'
+nnoremap <Space>sp :action FileStructurePopup<CR>
+let g:WhichKeyDesc_SpaceSt = '<Space>st Search text'
+nnoremap <Space>st :action FindInPath<CR>
+
+" b
+let g:WhichKeyDesc_SpaceB = '<Space>b Breakpoints/Buffers'
+let g:WhichKeyDesc_SpaceBr = '<Space>br Toggle breakpoint'
+nnoremap <Space>br :action ToggleLineBreakpoint<CR>
+let g:WhichKeyDesc_SpaceBb = '<Space>bb Backcycle buffer'
+nnoremap <Space>bb gT
+let g:WhichKeyDesc_SpaceBn = '<Space>bn Next buffer'
+nnoremap <Space>bn gt
+let g:WhichKeyDesc_SpaceBc = '<Space>bc Conditional breakpoint'
+nnoremap <Space>bc :action AddConditionalBreakpoint<CR>
+
+" e
+let g:WhichKeyDesc_SpaceE = '<Space>e Explorer'
+nnoremap <Space>e :action SelectInProjectView<CR>
+
+" d
+let g:WhichKeyDesc_SpaceD = '<Space>d Debug/Distractions'
+let g:WhichKeyDesc_SpaceDb = '<Space>db Debug'
+nnoremap <Space>db :action Debug<CR>
+let g:WhichKeyDesc_SpaceDc = '<Space>dc Check debug configuration'
+let g:WhichKeyDesc_SpaceDf = '<Space>df Toggle distraction free mode'
+nnoremap <Space>df :action ToggleDistractionFreeMode<CR>
+
+nnoremap K :action ShowHoverInfo<CR>
+
+let g:WhichKeyDesc_SpaceG = 'g Go'
+let g:WhichKeyDesc_SpaceGn = 'gn Go to next error/warning'
+nnoremap gn :action GotoNextError<CR>
+lt g:WhichKeyDesc_SpaceGN = 'gN Go to previous error/warning'
+nnoremap gN :action GotoPreviousError<CR>
+let g:WhichKeyDesc_SpaceGb = 'gb Go back'
+nnoremap gb :action Back<CR>
+let g:WhichKeyDesc_SpaceGf = 'gf Go forward'
+nnoremap gf :action Forward<CR>
+let g:WhichKeyDesc_SpaceGi = 'gi Go to implementation'
+nnoremap gi :action GotoImplementation<CR>
+let g:WhichKeyDesc_SpaceGd = 'gd Go to definition'
+let g:WhichKeyDesc_SpaceGD = 'gD Go to declaration'
+nnoremap gD <F12>
+
+noremap M :action MethodUp<CR>
+nnoremap m :action MethodDown<CR>
+
+""" <Space> w
+let g:WhichKeyDesc_Spacew = '<Space>w Window management'
+let g:WhichKeyDesc_Spaceww = '<Space>ww Go to other window'
+nnoremap <Space>ww <C-w><C-w>
+let g:WhichKeyDesc_Spacewv = '<Space>wv Vertically split'
+nnoremap <Space>wv <C-w>v
+let g:WhichKeyDesc_Spacewu = '<Space>wu Unsplit all windows'
+nnoremap <Space>wu :action UnsplitAll<CR>
+let g:WhichKeyDesc_Spacewq = '<Space>wq Quit window'
+nnoremap <Space>wq :bd<CR>
+let g:WhichKeyDesc_Spacewh = '<Space>wh Hide all windows'
+nnoremap <Space>wh :action HideAllWindows<CR>
+
+""" editing this file
+let g:WhichKeyDesc_Space = '<Space> Keymaps'
+let g:WhichKeyDesc_Spacebck = '\ IDE configuration'
+let g:WhichKeyDesc_Spacebcke = '\e Edit ideavim configuration'
+nnoremap \e :e ~/.ideavimrc<CR>
+let g:WhichKeyDesc_Spacebckr = '\r Reload vimrc configuration'
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+let g:WhichKeyDesc_Spacec = '<Space>c Clear highlights'
+nnoremap <Space>c :noh<CR>
