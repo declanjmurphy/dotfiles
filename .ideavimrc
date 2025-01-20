@@ -150,8 +150,6 @@ nnoremap <Space>ww <C-w><C-w>
 let g:WhichKeyDesc_Spacewu = '<Space>wu Unsplit all windows'
 nnoremap <Space>wu :action UnsplitAll<CR>
 
-let g:WhichKeyDesc_Spaceq = '<Space>q Quit window'
-nnoremap <Space>q :bd<CR>
 
 let g:WhichKeyDesc_Spaceh = '<Space>h Hide all windows'
 nnoremap <Space>h :action HideAllWindows<CR>
@@ -174,11 +172,11 @@ nnoremap <Space>p <Esc>viwP
 
 " redo
 nnoremap U <C-R>
-nnoremap Q @q
 nnoremap L :tabnext<CR>
 nnoremap H :tabprev<CR>
 nnoremap K :action ShowHoverInfo<CR>
 vnoremap i :action copilot.chat.inline<CR>
+nnoremap Q :bd<CR>
 
 let g:WhichKeyDesc_Spacess = '<Space>ss Recent solutions'
 nnoremap <Space>ss :action RiderManageRecentProjects<CR>
