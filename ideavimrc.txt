@@ -1,17 +1,17 @@
 """ options
 set relativenumber
 set number
-set scrolloff=10
+set scrolloff=5
 set clipboard+=unnamed
 set ignorecase
 set incsearch
-set hls
+set nohls
 set notimeout
 set timeoutlen=5000
 
 """ plugins
+set commentary
 set which-key
-set sneak
 let g:WhichKey_DefaultDelay = 0
 Plug 'preservim/nerdtree'
 Plug 'machakann/vim-highlightedyank'
@@ -34,17 +34,19 @@ let g:WhichKeyDesc_G = 'g Go'
 let g:WhichKeyDesc_Gi = 'gi Implementations'
 let g:WhichKeyDesc_Gn = 'gn Next error'
 let g:WhichKeyDesc_Gn_p = 'gN Previous error'
-let g:WhichKeyDesc_Gb = 'gb Back'
-let g:WhichKeyDesc_Gf = 'gf Forward'
+
+""" leader j
+let g:WhichKeyDesc_SpaceJ = 'Jump'
+nnoremap <Space>j :action JumpToLastWindow<CR>
 
 """ leader f
 let g:WhichKeyDesc_SpaceF = '<Space>f Find'
 let g:WhichKeyDesc_SpaceFf = '<Space>ff Find file'
 nnoremap <Space>ff :action GotoFile<CR>
-let g:WhichKeyDesc_SpaceFu = '<Space>fu Find usages'
-nnoremap <Space>fu :action FindUsages<CR>
 let g:WhichKeyDesc_SpaceFw = '<Space>fw Show find window'
 nnoremap <Space>fw :action ActivateFindToolWindow<CR>
+let g:WhichKeyDesc_SpaceFn = '<Space>fn New file here'
+nnoremap <Space>fn :action NewElementSamePlace<CR>
 
 """ leader v
 let g:WhichKeyDesc_SpaceV = '<Space>v VCS'
@@ -75,7 +77,7 @@ let g:WhichKeyDesc_SpaceTtn = '<Space>tn New terminal'
 nnoremap <Space>tn :action Terminal.OpenInTerminal<CR>
 nnoremap <Space>ta :action ActivateTerminalToolWindow<CR>
 
-""" s
+""" f
 nnoremap s :action KJumpAction.Char2<CR>
 
 """ <Space> s
@@ -84,72 +86,99 @@ let g:WhichKeyDesc_SpaceSe = '<Space>se Search everywhere'
 nnoremap <Space>se :action SearchEverywhere<CR>
 let g:WhichKeyDesc_SpaceSp = '<Space>sp View structure popup'
 nnoremap <Space>sp :action FileStructurePopup<CR>
-let g:WhichKeyDesc_SpaceSt = '<Space>st Search text'
-nnoremap <Space>st :action FindInPath<CR>
+let g:WhichKeyDesc_Sif = '<Space>sif .. files'
+nnoremap <Space>sif :action FindInPath<CR>
+let g:WhichKeyDesc_Si = '<Space>si Search in'
 
 " b
 let g:WhichKeyDesc_SpaceB = '<Space>b Breakpoints/Buffers'
 let g:WhichKeyDesc_SpaceBr = '<Space>br Toggle breakpoint'
 nnoremap <Space>br :action ToggleLineBreakpoint<CR>
-let g:WhichKeyDesc_SpaceBb = '<Space>bb Backcycle buffer'
-nnoremap <Space>bb gT
-let g:WhichKeyDesc_SpaceBn = '<Space>bn Next buffer'
-nnoremap <Space>bn gt
 let g:WhichKeyDesc_SpaceBc = '<Space>bc Conditional breakpoint'
 nnoremap <Space>bc :action AddConditionalBreakpoint<CR>
 
 " e
-let g:WhichKeyDesc_SpaceE = '<Space>e Explorer'
-nnoremap <Space>e :action SelectInProjectView<CR>
+let g:WhichKeyDesc_Spacee = '<Space>e Explorer'
+nnoremap <Space>e :action ActivateProjectToolWindow<CR>
+let g:WhichKeyDesc_SpaceE = '<Space>E Select in Explorer'
+nnoremap <Space>E :action SelectInProjectView <CR>
+
 
 " d
 let g:WhichKeyDesc_SpaceD = '<Space>d Debug/Distractions'
 let g:WhichKeyDesc_SpaceDb = '<Space>db Debug'
-nnoremap <Space>db :action Debug<CR>
-let g:WhichKeyDesc_SpaceDc = '<Space>dc Check debug configuration'
+nnoremap <Space>db :action ChooseDebugConfiguration<CR>
+let g:WhichKeyDesc_SpaceDcw = '<Space>dcw Check debug configuration (Web)'
+nnoremap <Space>dcw :e ~/RiderProjects/attraxnew/src/Copernicus.Web/Properties/launchSettings.json<CR>
+let g:WhichKeyDesc_SpaceDca = '<Space>dcw Check debug configuration (Admin)'
+nnoremap <Space>dca :e ~/RiderProjects/attraxnew/src/Copernicus.Web.Admin/Properties/launchSettings.json<CR>
 let g:WhichKeyDesc_SpaceDf = '<Space>df Toggle distraction free mode'
 nnoremap <Space>df :action ToggleDistractionFreeMode<CR>
 
-nnoremap K :action ShowHoverInfo<CR>
-
 let g:WhichKeyDesc_SpaceG = 'g Go'
+
 let g:WhichKeyDesc_SpaceGn = 'gn Go to next error/warning'
 nnoremap gn :action GotoNextError<CR>
-lt g:WhichKeyDesc_SpaceGN = 'gN Go to previous error/warning'
+
+let g:WhichKeyDesc_SpaceGN = 'gN Go to previous error/warning'
 nnoremap gN :action GotoPreviousError<CR>
-let g:WhichKeyDesc_SpaceGb = 'gb Go back'
-nnoremap gb :action Back<CR>
-let g:WhichKeyDesc_SpaceGf = 'gf Go forward'
-nnoremap gf :action Forward<CR>
+
+let g:WhichKeyDesc_gr = 'gr Go to references'
+nnoremap gr :action FindUsages<CR>
+
 let g:WhichKeyDesc_SpaceGi = 'gi Go to implementation'
 nnoremap gi :action GotoImplementation<CR>
+
 let g:WhichKeyDesc_SpaceGd = 'gd Go to definition'
 let g:WhichKeyDesc_SpaceGD = 'gD Go to declaration'
 nnoremap gD <F12>
 
-noremap M :action MethodUp<CR>
-nnoremap m :action MethodDown<CR>
+" Go to Left Window
+nnoremap <C-h> <C-w>h
+" Go to Lower Window
+nnoremap <C-j> <C-w>j
+" Go to Upper Window
+nnoremap <C-k> <C-w>k
+" Go to Right Window
+nnoremap <C-l> <C-w>l
 
 """ <Space> w
 let g:WhichKeyDesc_Spacew = '<Space>w Window management'
 let g:WhichKeyDesc_Spaceww = '<Space>ww Go to other window'
 nnoremap <Space>ww <C-w><C-w>
-let g:WhichKeyDesc_Spacewv = '<Space>wv Vertically split'
-nnoremap <Space>wv <C-w>v
+
 let g:WhichKeyDesc_Spacewu = '<Space>wu Unsplit all windows'
 nnoremap <Space>wu :action UnsplitAll<CR>
-let g:WhichKeyDesc_Spacewq = '<Space>wq Quit window'
-nnoremap <Space>wq :bd<CR>
-let g:WhichKeyDesc_Spacewh = '<Space>wh Hide all windows'
-nnoremap <Space>wh :action HideAllWindows<CR>
+
+let g:WhichKeyDesc_Spaceq = '<Space>q Quit window'
+nnoremap <Space>q :bd<CR>
+
+let g:WhichKeyDesc_Spaceh = '<Space>h Hide all windows'
+nnoremap <Space>h :action HideAllWindows<CR>
 
 """ editing this file
 let g:WhichKeyDesc_Space = '<Space> Keymaps'
 let g:WhichKeyDesc_Spacebck = '\ IDE configuration'
+
 let g:WhichKeyDesc_Spacebcke = '\e Edit ideavim configuration'
 nnoremap \e :e ~/.ideavimrc<CR>
+
 let g:WhichKeyDesc_Spacebckr = '\r Reload vimrc configuration'
 nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
 let g:WhichKeyDesc_Spacec = '<Space>c Clear highlights'
 nnoremap <Space>c :noh<CR>
+
+let g:WhichKeyDesc_Spacep = '<Space>p Paste over word'
+nnoremap <Space>p <Esc>viwP
+
+" redo
+nnoremap U <C-R>
+nnoremap Q @q
+nnoremap L :tabnext<CR>
+nnoremap H :tabprev<CR>
+nnoremap K :action ShowHoverInfo<CR>
+vnoremap i :action copilot.chat.inline<CR>
+
+let g:WhichKeyDesc_Spacess = '<Space>ss Recent solutions'
+nnoremap <Space>ss :action RiderManageRecentProjects<CR>
