@@ -65,8 +65,8 @@ nnoremap <Leader>E :action SelectInProjectView <CR>
 
 " delete, debug, distraction 
 nnoremap <Leader>db :action ChooseDebugConfiguration<CR> 
-nnoremap <Leader>dcw :e ~/RiderProjects/attrax/src/Copernicus.Web/Properties/launchSettings.json<CR>
-nnoremap <Leader>dca :e ~/RiderProjects/attrax/src/Copernicus.Web.Admin/Properties/launchSettings.json<CR>
+nnoremap <Leader>dcw :e /Path.To.Web/Properties/launchSettings.json<CR>
+nnoremap <Leader>dca :e /Path.To.Web.Admin/Properties/launchSettings.json<CR>
 nnoremap <Leader>df :action ToggleDistractionFreeMode<CR>
 
 " go 
